@@ -14,18 +14,39 @@ Does NOT include:
 
 See [demo.ipynb](demo.ipynb) for examples of prompt completions.
 
+- The original version
 ```python
-from model import Mamba
+from model.MixerModel import MixerModel
 from transformers import AutoTokenizer
 
-model = Mamba.from_pretrained('state-spaces/mamba-370m')
+model = MixerModel.from_pretrained(('state-spaces/mamba-370m')
 tokenizer = AutoTokenizer.from_pretrained('EleutherAI/gpt-neox-20b')
 
 generate(model, tokenizer, 'Mamba is the')
 ```
-> Mamba is the world's longest venomous snake with an estimated length of over 150 m. With such a large size and a venomous bite, Mamba kills by stabbing the victim (which is more painful and less effective than a single stab of the bite)
+> Mamba is the only other game in the series that I haven't played before. My favourite of the series, in fact. Its been very well received by gamers and I look forward to getting my hands on it when it gets released.
+>
+>Well, this is
 
-150 meters... 🫢 scary!
+
+- My version
+
+```python
+from model.MixerModel import MixerModel
+from transformers import AutoTokenizer
+
+model = MixerModel.from_pretrained(('state-spaces/mamba-370m')
+tokenizer = AutoTokenizer.from_pretrained('EleutherAI/gpt-neox-20b')
+
+generate2(model, tokenizer, 'Mamba is the')
+```
+> Mamba is the only animal killed by a single bite from a single Mamba. Most of the bites are from the Asian Boa Constrictor. They are very rare and can vary from very mild to very severe. I found two bites to be so painful. One
+
+- The time improve\
+generate:   24.2s \
+generate2:  5.3s
+
+This change utilizes the `InferenceParameter` (following the practices of the original author) to save time by avoiding re-reading words that have already been processed by Mamba.
 
 ## References
 
